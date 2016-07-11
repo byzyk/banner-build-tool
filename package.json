@@ -1,0 +1,31 @@
+{
+  "name": "bannerbuildtool",
+  "version": "2.0.0",
+  "description": "HTML5 Banners Production Tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app/server"
+  },
+  "keywords": [
+    "banners",
+    "html5",
+    "ads"
+  ],
+  "author": "Bohdan Khodakivskyi",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-register": "^6.9.0",
+    "babelify": "^7.3.0",
+    "bootstrap": "^3.3.6",
+    "browserify": "^13.0.1",
+    "express": "^4.14.0",
+    "express-react-views": "^0.10.2",
+    "path": "^0.12.7",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "shelljs": "^0.7.0"
+  }
+}

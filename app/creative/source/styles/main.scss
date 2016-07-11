@@ -1,0 +1,91 @@
+@import 'vendor/reset';
+@import 'vendor/functions';
+// Do not edit above this line!
+
+//@import 'fonts/Font_Regular';
+
+$bannerFontFamily: 'Font Regular';
+
+%font-regular{
+    font-family: 'Font Regular', sans-serif;
+}
+
+$color_black: #000000;
+$color_white: #ffffff;
+$color_red: #c81517;
+
+$bannerBgColor: $color_white;
+$bannerBorderColor: $color_black;
+
+
+#Banner {
+    width: $banner_width + px;
+    height: $banner_height + px;
+    background-color: $bannerBgColor;
+    overflow: hidden;
+    position: relative;
+    font-family: $bannerFontFamily, sans-serif;
+    opacity: 0;
+    &:hover {
+        cursor: pointer;
+    }
+    &:after{
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid $bannerBorderColor;
+        z-index: 15;
+    }
+}
+
+#Image{
+    position: absolute;
+    @extend %image_position;
+    width: $image_width;
+    height: $image_height;
+    background: url(images/image.jpg) 0 0 no-repeat;
+    z-index: 3;
+}
+
+#Mask{
+    position: absolute;
+    @extend %mask_position;
+    width: $mask_width;
+    height: $mask_height;
+    background: url(images/mask.png) 0 0 no-repeat;
+    z-index: 3;
+}
+
+#Logo {
+    position: absolute;
+    @extend %logo_position;
+    width: $logo_width;
+    height: $logo_height;
+    background: url(images/logo.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    z-index: 5;
+}
+
+#Text {
+    position: absolute;
+    @extend %text_position;
+    width: $text_width;
+    height: $text_height;
+    background: url(images/text.svg) 0 0 no-repeat;
+    background-size: 100% 100%;
+    z-index: 5;
+}
+
+#CTA {
+    position: absolute;
+    @extend %cta_position;
+    width: $cta_width;
+    height: $cta_height;
+    background: url(images/cta.svg) 0 0 no-repeat;
+    background-size: 100% 100%;
+    z-index: 5;
+}

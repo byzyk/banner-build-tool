@@ -1,0 +1,109 @@
+@mixin border-radius ($radius: 5px) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+@mixin border-radiuses ($topright: 0, $bottomright: 0, $bottomleft: 0, $topleft: 0) {
+  -webkit-border-top-right-radius:    $topright;
+  -webkit-border-bottom-right-radius: $bottomright;
+  -webkit-border-bottom-left-radius:  $bottomleft;
+  -webkit-border-top-left-radius:     $topleft;
+
+  -moz-border-radius-topright:        $topright;
+  -moz-border-radius-bottomright:     $bottomright;
+  -moz-border-radius-bottomleft:      $bottomleft;
+  -moz-border-radius-topleft:         $topleft;
+
+  border-top-right-radius:            $topright;
+  border-bottom-right-radius:         $bottomright;
+  border-bottom-left-radius:          $bottomleft;
+  border-top-left-radius:             $topleft;
+
+  -moz-background-clip:    padding;
+  -webkit-background-clip: padding-box;
+  background-clip:         padding-box;
+}
+
+@mixin gradient ($startColor: #eee, $endColor: white) {
+  background-color: $startColor;
+  background: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+  background: -webkit-linear-gradient(top, $startColor, $endColor);
+  background: -moz-linear-gradient(top, $startColor, $endColor);
+  background: -ms-linear-gradient(top, $startColor, $endColor);
+  background: -o-linear-gradient(top, $startColor, $endColor);
+}
+
+@mixin gradient-for-mask ($aColor, $bColor, $per1, $per2) {
+  background: $aColor;
+  background: -moz-linear-gradient(top,  $aColor 0%, $bColor $per1, $bColor $per2, $aColor 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$aColor), color-stop($per1,$bColor), color-stop($per2,$bColor), color-stop(100%,$aColor));
+  background: -webkit-linear-gradient(top,  $aColor 0%, $bColor $per1, $bColor $per2, $aColor 100%);
+  background: -o-linear-gradient(top,  $aColor 0%, $bColor $per1, $bColor $per2, $aColor 100%);
+  background: -ms-linear-gradient(top,  $aColor 0%, $bColor $per1, $bColor $per2, $aColor 100%);
+  background: linear-gradient(to bottom,  $aColor 0%, $bColor $per1, $bColor $per2, $aColor 100%);
+}
+
+@mixin box-sizing ($type: border-box) {
+  -webkit-box-sizing: $type;
+  -moz-box-sizing: $type;
+  box-sizing: $type;
+}
+
+@mixin drop-shadow ($x: 0, $y: 1px, $blur: 2px, $spread: 0, $alpha: 0.25) {
+  -webkit-box-shadow:	$x $y $blur $spread rgba(0, 0, 0, $alpha);
+  -moz-box-shadow:	$x $y $blur $spread rgba(0, 0, 0, $alpha);
+  box-shadow:		$x $y $blur $spread rgba(0, 0, 0, $alpha);
+}
+
+@mixin inner-shadow ($x: 0, $y: 1px, $blur: 2px, $spread: 0, $alpha: 0.25) {
+  -webkit-box-shadow: inset $x $y $blur $spread rgba(0, 0, 0, $alpha);
+  -moz-box-shadow:    inset $x $y $blur $spread rgba(0, 0, 0, $alpha);
+  box-shadow:         inset $x $y $blur $spread rgba(0, 0, 0, $alpha);
+}
+
+@mixin rotate ($deg) {
+  -webkit-transform-origin: 50%  51%;
+  -webkit-transform: rotate($deg);
+  -moz-transform: 	 rotate($deg);
+  -ms-transform:     rotate($deg);
+  -o-transform: 	 rotate($deg);
+}
+
+@mixin transform($transforms) {
+  -moz-transform:    $transforms;
+  -o-transform:      $transforms;
+  -ms-transform:     $transforms;
+  -webkit-transform: $transforms;
+  transform:         $transforms;
+}
+
+@mixin transition($el, $sec, $ease) {
+  -webkit-transition: $el $sec $ease;
+  -moz-transition: $el $sec $ease;
+  -o-transition: $el $sec $ease;
+  transition: $el $sec $ease;
+}
+
+@mixin transform-origin ($origin) {
+  -moz-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  -webkit-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+%middle_align{
+
+  transform-style: preserve-3d;
+  > div {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+}
