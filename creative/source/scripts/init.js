@@ -89,7 +89,7 @@ function BC () { //BC -> BannerConstructor
             }
         } else {
 
-            b.appendScript('/source/scripts/engine.min.js', function () {
+            b.appendScript('/source/scripts/build/engine.min.js', function () {
                 b.init();
             });
             

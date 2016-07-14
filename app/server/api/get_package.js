@@ -2,7 +2,7 @@ var fs = require('fs');
 
 module.exports = function (app, path) {
 
-    app.get('/get_package', function (req, res) {
+    app.get('/api/get_package', function (req, res) {
         fs.readFile(path, function (err, data) {
             if (err) {
                 console.log(err);

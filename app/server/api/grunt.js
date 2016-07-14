@@ -2,7 +2,7 @@ var shell = require('shelljs');
 
 module.exports = function (app, path) {
 
-    app.get('/grunt/:task/', function (req, res) {
+    app.get('/api/grunt/:task/', function (req, res) {
 
         var cmdCd = 'cd ' + path,
             cmdGrunt = 'grunt ' + req.params.task;

@@ -17,20 +17,23 @@ app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
 
 
-// - - - - - Routes
+// - - - - - Routes / API
 require(projectRoot + '/routes/index')(app);
 
-require(projectRoot + '/routes/get_creative_list')(app, creativeRoot);
+require(projectRoot + '/api/get_creative_list')(app, creativeRoot);
 
-require(projectRoot + '/routes/get_package')(app, packagePath);
-require(projectRoot + '/routes/update_package')(app, packagePath);
+require(projectRoot + '/api/get_package')(app, packagePath);
+require(projectRoot + '/api/update_package')(app, packagePath);
 
-require(projectRoot + '/routes/grunt')(app, pathRoot);
+require(projectRoot + '/api/grunt')(app, pathRoot);
 // - - - - - - - -
 
 
 app.use(express.static(staticRoot));
-app.use('/styles', express.static(pathRoot + '/node_modules/bootstrap/dist/css/'));
+app.use('/a/styles', express.static(pathRoot + '/node_modules/bootstrap/dist/css/'));
+
+app.use('/banner', express.static(pathRoot + '/creative/source/banners/'));
+app.use('/source', express.static(pathRoot + '/creative/source/'));
 
 app.listen(1337, function () {
     console.log(package.name + ' listening on port 1337');

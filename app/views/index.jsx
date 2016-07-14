@@ -1,4 +1,5 @@
 var React = require('react');
+var Banner = require('./components/banner');
 
 var Homepage = React.createClass({
     render: function() {
@@ -9,13 +10,32 @@ var Homepage = React.createClass({
             <head>
 
                 <title>{this.props.title}</title>
-                <link href="styles/bootstrap.min.css" rel="stylesheet"/>
+                <link href="a/styles/bootstrap.min.css" rel="stylesheet"/>
 
             </head>
 
             <body>
 
-                <div className="btn">sf sdf sdfs</div>
+                <nav className="navbar navbar-default navbar-fixed-top">
+                    <div className="container-fluid">
+                        <div className="navbar-header">
+                            <div className="navbar-brand">
+                                {this.props.title}
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <div className="container-fluid">
+                    <div className="row" style={{marginTop: 100}}>
+                        <div class="col-md-12">
+
+                            <Banner />
+
+                        </div>
+                    </div>
+                </div>
+
 
             </body>
 
