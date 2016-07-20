@@ -1,15 +1,13 @@
-var React = require('react');
+import React from 'react';
 
-var Banner = React.createClass({
-    render: function() {
+export default class Banner extends React.Component {
+    render() {
         return (
 
             <div>
-                Banner is here
+                Banner is here: {this.props.size}
             </div>
 
         );
     }
-});
-
-module.exports = Banner;
+}
