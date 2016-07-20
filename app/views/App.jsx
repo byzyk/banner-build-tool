@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Banner from './components/banner';
+// import Banner from './components/banner';
 
 class App extends React.Component {
 
@@ -42,12 +42,9 @@ class App extends React.Component {
         return (
 
             <div>
-                <Banner size={this.state.banner} />
-
-
 
                 <div>
-                    {this.state.banner}
+                    {this.state.banners}
                 </div>
 
             </div>
