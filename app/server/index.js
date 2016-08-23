@@ -9,15 +9,14 @@ var staticRoot = path.join(projectRoot, '../public');
 var creativeRoot = path.join(pathRoot, '/creative');
 var viewRoot = path.join(projectRoot, '../views');
 
-var packagePath = path.join(projectRoot, '../../package.json');
-var package = require(packagePath);
+var configPath = path.join(projectRoot, '../data/config.json');
 
 
 // - - - - - API
 require(projectRoot + '/api/get_creative_list')(app, creativeRoot);
 
-require(projectRoot + '/api/get_package')(app, packagePath);
-require(projectRoot + '/api/update_package')(app, packagePath);
+require(projectRoot + '/api/get_config')(app, configPath);
+// require(projectRoot + '/api/update_package')(app, packagePath);
 
 require(projectRoot + '/api/grunt')(app, pathRoot);
 // - - - - - - - -
@@ -32,5 +31,5 @@ app.use('/banner', express.static(pathRoot + '/creative/source/banners/'));
 app.use('/source', express.static(pathRoot + '/creative/source/'));
 
 app.listen(1337, function () {
-    console.log(package.name + ' listening on port 1337');
+    console.log('listening on port 1337');
 });

@@ -30,15 +30,6 @@ Banner.Animation.start = function () {
     Timeline.main
         .to(the.Banner, 0.2, {opacity: 1})
 
-        .from(the.Mask, conf.Mask.duration, conf.Mask.animation)
-        .from(the.Image, conf.Image.duration, conf.Image.animation, conf.Image.delay)
-
-        .from(the.Logo, 0.35, {opacity: 0}, '-=.1')
-
-        .from(the.Text, conf.Text.duration, conf.Text.animation, '-=.15')
-
-        .from(the.CTA, conf.CTA.duration, conf.CTA.animation, '-=.1')
-
     ;
 
     Banner.TIMELINE = [Timeline.main];
