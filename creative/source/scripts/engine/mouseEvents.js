@@ -17,5 +17,5 @@ Banner.mouseEvents = {
         }
         
     }
-    
+
 };

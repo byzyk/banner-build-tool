@@ -5,7 +5,9 @@ module.exports = function (gulp, plugin, PATH) {
         return plugin.nodemon({
             script: PATH.appServer + '/index.js',
             ignore: [
-                PATH.appStatic
+                PATH.appStatic,
+                PATH.creative,
+                PATH.gulpTasks
             ]
         }).on('start', function () {
             if (!started) {

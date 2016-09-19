@@ -1,6 +1,9 @@
 module.exports = function () {
     
     var PATH = {};
+    
+    
+    PATH.gulpTasks = 'gulp-tasks';
 
     // APP
     PATH.app = 'app';

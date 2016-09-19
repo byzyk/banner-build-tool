@@ -50,5 +50,11 @@ gulp.task('creative-dev', ['browser-sync'], task('creative/dev', {
 gulp.task('creative-sass', task('creative/sass', {
     filter: plugin.filter,
     sass: plugin.sass,
-    browserSync: browserSync,
+    browserSync: browserSync
+}));
+
+gulp.task('creative-engine', task('creative/engine', {
+    concat: plugin.concat,
+    newer: plugin.newer,
+    browserSync: browserSync
 }));
