@@ -24,6 +24,5 @@ Banner.parseElId = function (el) {
 Banner.Animation = {};
 Banner.Animation.config = BannerConfig;
 
-Banner.Template = { item: {} };
 Banner.Component = { item: {} };
 

@@ -6,8 +6,6 @@ Banner.init = function () {
 
     Banner.Data.dimension = Banner.getBannerDimension();
 
-    Banner.Template.Init();
-
     Banner.Component.Init();
 
     Banner.getElementsBy('id');
