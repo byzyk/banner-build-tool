@@ -2,9 +2,9 @@ module.exports = function (gulp, plugin, PATH) {
     
     return function () {
         var f = plugin.filter(['**/*.css']);
-        return gulp.src(PATH.banners + '/EN_300x250/banner.scss')
+        return gulp.src(PATH.banners + '/*/banner.scss', {base: './'})
             .pipe(plugin.sass())
-            .pipe(gulp.dest(PATH.banners + '/EN_300x250'))
+            .pipe(gulp.dest('.'))
             .pipe(f)
             .pipe(plugin.browserSync.stream());
     }

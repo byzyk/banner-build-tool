@@ -13,7 +13,7 @@ class App extends React.Component {
             config: {},
 
             banners: [],
-            currentID: 0,
+            currentID: 1,
             currentBanner: {}
         };
 
@@ -31,7 +31,7 @@ class App extends React.Component {
                 this.setState({
                     config: data
                 });
-
+                
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(url, status, err.toString());
