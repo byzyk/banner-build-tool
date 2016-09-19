@@ -172,26 +172,26 @@ Banner.Component.init = function () {
 
 };
 Banner.Events.items.push({
-    el: '#clickTag',
-    e: 'click',
-    func: function () {
+    element: '#clickTag',
+    event: 'click',
+    function: function () {
         window.open(clickTag, '_blank');
     }
 });
 
 
 Banner.Events.items.push({
-    el: '#Banner',
-    e: 'mouseover',
-    func: function () {
+    element: '#Banner',
+    event: 'mouseover',
+    function: function () {
         TweenMax.to(Banner.el.CTA, .2, {ease: Power3.easeInOut, scale: 1.2});
     }
 });
 
 Banner.Events.items.push({
-    el: '#Banner',
-    e: 'mouseout',
-    func: function () {
+    element: '#Banner',
+    event: 'mouseout',
+    function: function () {
         TweenMax.to(Banner.el.CTA, .2, {ease: Power3.easeInOut, scale: 1});
     }
 });
@@ -202,12 +202,12 @@ Banner.Events.init =  function () {
     for (var i = 0; i < items.length; i++) {
 
         var item = items[i];
-        var selector = document.querySelectorAll(item.el);
+        var selector = document.querySelectorAll(item.element);
         for (var j = 0; j < selector.length; j++) {
 
             (function (s, e, index) {
 
-                s[index].addEventListener(e.e, e.func, false);
+                s[index].addEventListener(e.event, e.function, false);
 
             })(selector, item, j);
 

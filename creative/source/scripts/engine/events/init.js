@@ -5,12 +5,12 @@ Banner.Events.init =  function () {
     for (var i = 0; i < items.length; i++) {
 
         var item = items[i];
-        var selector = document.querySelectorAll(item.el);
+        var selector = document.querySelectorAll(item.element);
         for (var j = 0; j < selector.length; j++) {
 
             (function (s, e, index) {
 
-                s[index].addEventListener(e.e, e.func, false);
+                s[index].addEventListener(e.event, e.function, false);
 
             })(selector, item, j);
 
