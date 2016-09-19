@@ -17,6 +17,8 @@ module.exports = function () {
     PATH.source = PATH.creative + '/source';
     PATH.banners = PATH.source + '/banners';
     PATH.styles = PATH.source + '/styles';
+    PATH.scripts = PATH.source + '/scripts';
+    PATH.engineSrc = PATH.scripts + '/engine';
 
     return PATH;
 

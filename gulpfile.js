@@ -25,17 +25,17 @@ gulp.task('nodemon', task('nodemon', {
 
 
 // --------------- APP
-gulp.task('app-dev', ['browser-sync'], task('app-dev', {
+gulp.task('app-dev', ['browser-sync'], task('app/dev', {
     browserSync: browserSync
 }));
 
-gulp.task('app-sass', task('app-sass', {
+gulp.task('app-sass', task('app/sass', {
     filter: plugin.filter,
     sass: plugin.sass,
     browserSync: browserSync
 }));
 
-gulp.task('app-es6', task('app-es6', {
+gulp.task('app-es6', task('app/es6', {
     browserify: browserify,
     source: source
 }));
@@ -43,12 +43,12 @@ gulp.task('app-es6', task('app-es6', {
 
 
 // --------------- CREATIVE
-gulp.task('creative-dev', ['browser-sync'], task('creative-dev', {
+gulp.task('creative-dev', ['browser-sync'], task('creative/dev', {
     browserSync: browserSync
 }));
 
-gulp.task('creative-sass', task('creative-sass', {
+gulp.task('creative-sass', task('creative/sass', {
     filter: plugin.filter,
     sass: plugin.sass,
-    browserSync: browserSync
+    browserSync: browserSync,
 }));
