@@ -20,9 +20,9 @@ Banner.parseElId = function (el) {
 
 };
 
+Banner.Component = { items: {} };
+
+Banner.Events = { items: [] };
 
 Banner.Animation = {};
-Banner.Animation.config = BannerConfig;
-
-Banner.Component = { item: {} };
 

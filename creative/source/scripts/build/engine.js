@@ -20,72 +20,30 @@ Banner.parseElId = function (el) {
 
 };
 
+Banner.Component = { items: {} };
+
+Banner.Events = { items: [] };
 
 Banner.Animation = {};
-Banner.Animation.config = BannerConfig;
-
-Banner.Component = { item: {} };
 
 
-Banner.click = function () {
-
-    window.open(clickTag, '_blank');
-
-};
 Banner.init = function () {
 
     Banner.getElementsBy('id');
-
-    Banner.el.clickTag.addEventListener('click', Banner.click);
-
+    
     Banner.Data.dimension = Banner.getBannerDimension();
 
-    Banner.Component.Init();
+    Banner.Component.init();
 
     Banner.getElementsBy('id');
 
     Banner.loadImages(function () {
 
-        Banner.Animation.start();
+        Banner.Animation.init();
+
+        Banner.Events.init();
 
     });
-
-};
-Banner.Animation.start = function () {
-
-    var the = Banner.el,
-
-        conf = Banner.Animation.config(this),
-
-        Timeline = {
-            main: new TimelineMax({
-                onComplete: function () {
-                    Banner.mouseEvents.init();
-                }
-            })
-        };
-
-    // Banner.mouseEvents.items.push({
-    //     el: 'Banner',
-    //     e: 'mouseover',
-    //     func: function () {
-    //         TweenMax.to(Banner.el.CTA, conf.CTA_OVER.duration, conf.CTA_OVER.animation);
-    //     }
-    // });
-    // Banner.mouseEvents.items.push({
-    //     el: 'Banner',
-    //     e: 'mouseout',
-    //     func: function () {
-    //         TweenMax.to(Banner.el.CTA, conf.CTA_OUT.duration, conf.CTA_OUT.animation);
-    //     }
-    // });
-
-    Timeline.main
-        .to(the.Banner, 0.2, {opacity: 1})
-
-    ;
-
-    Banner.TIMELINE = [Timeline.main];
 
 };
 Banner.loadImages = function (callback) {
@@ -162,30 +120,39 @@ Banner.loadImages = function (callback) {
     preloadAllImages(callback);
 
 };
-Banner.mouseEvents = {
-    
-    items: [],
-    
-    init: function () {
-        
-        var items = Banner.mouseEvents.items;
-        
-        for (var i = 0; i < items.length; i++) {
-            
-            var item = items[i];
-            
-            (function (e) {
-                document.getElementById(e.el).addEventListener(e.e, e.func, false);
-            })(item);
-            
-        }
-        
-    }
+Banner.Animation.start = function (the, Timeline, conf) {
+
+    Timeline.main
+        .to(the.Banner, 0.2, {opacity: 1})
+
+        .from(the.CTA, 1, {opacity: 0})
+
+    ;
 
 };
-Banner.Component.Init = function () {
+Banner.Animation.config = BannerConfig;
 
-    var C = Banner.Component.item,
+Banner.Animation.init = function () {
+
+    var the = Banner.el,
+
+        conf = Banner.Animation.config(this),
+
+        Timeline = {
+            main: new TimelineMax({
+                onComplete: function () {
+                }
+            })
+        };
+    
+    Banner.Animation.start(the, Timeline, conf);
+
+    Banner.TIMELINE = [Timeline.main];
+
+};
+Banner.Component.init = function () {
+
+    var C = Banner.Component.items,
         selector = 'data-component',
         elements = document.querySelectorAll('[' + selector + ']'),
         components = [],
@@ -202,5 +169,52 @@ Banner.Component.Init = function () {
             }
         }
     }
+
+};
+Banner.Events.items.push({
+    el: '#clickTag',
+    e: 'click',
+    func: function () {
+        window.open(clickTag, '_blank');
+    }
+});
+
+
+Banner.Events.items.push({
+    el: '#Banner',
+    e: 'mouseover',
+    func: function () {
+        TweenMax.to(Banner.el.CTA, .2, {ease: Power3.easeInOut, scale: 1.2});
+    }
+});
+
+Banner.Events.items.push({
+    el: '#Banner',
+    e: 'mouseout',
+    func: function () {
+        TweenMax.to(Banner.el.CTA, .2, {ease: Power3.easeInOut, scale: 1});
+    }
+});
+Banner.Events.init =  function () {
+
+    var items = Banner.Events.items;
+
+    for (var i = 0; i < items.length; i++) {
+
+        var item = items[i];
+        var selector = document.querySelectorAll(item.el);
+        for (var j = 0; j < selector.length; j++) {
+
+            (function (s, e, index) {
+
+                s[index].addEventListener(e.e, e.func, false);
+
+            })(selector, item, j);
+
+        }
+
+    }
+
+    Banner.Events.items = [];
 
 };

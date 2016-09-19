@@ -1,6 +1,6 @@
-Banner.Component.Init = function () {
+Banner.Component.init = function () {
 
-    var C = Banner.Component.item,
+    var C = Banner.Component.items,
         selector = 'data-component',
         elements = document.querySelectorAll('[' + selector + ']'),
         components = [],

@@ -1,5 +1,4 @@
-var Banner,
-    conf = {};
+var Banner;
 
 
 window.onload = function() {
