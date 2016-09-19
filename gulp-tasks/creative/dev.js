@@ -1,7 +1,7 @@
 module.exports = function (gulp, plugin, PATH) {
     
     return function () {
-        gulp.watch([PATH.styles + '/main.scss', PATH.banners + '/*/banner.scss'], ['creative-sass']);
+        gulp.watch([PATH.styles + '/main.scss', PATH.banners + '/*/styles/banner.scss'], ['creative-sass']);
         
         gulp.watch([PATH.engineSrc + '/**/*.js'], ['creative-engine']);
 

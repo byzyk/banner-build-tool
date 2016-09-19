@@ -59,7 +59,7 @@ $bannerBorderColor: $color_black;
     @extend %image_position;
     width: $image_width;
     height: $image_height;
-    background: url(images/image.jpg) 0 0 no-repeat;
+    background: url(../images/image.jpg) 0 0 no-repeat;
     z-index: 3;
 }
 
@@ -68,7 +68,7 @@ $bannerBorderColor: $color_black;
     @extend %mask_position;
     width: $mask_width;
     height: $mask_height;
-    background: url(images/mask.png) 0 0 no-repeat;
+    background: url(../images/mask.png) 0 0 no-repeat;
     z-index: 3;
 }
 
@@ -77,7 +77,7 @@ $bannerBorderColor: $color_black;
     @extend %logo_position;
     width: $logo_width;
     height: $logo_height;
-    background: url(images/logo.png) 0 0 no-repeat;
+    background: url(../images/logo.png) 0 0 no-repeat;
     background-size: 100% 100%;
     z-index: 5;
 }
@@ -87,7 +87,7 @@ $bannerBorderColor: $color_black;
     @extend %text_position;
     width: $text_width;
     height: $text_height;
-    background: url(images/text.svg) 0 0 no-repeat;
+    background: url(../images/text.svg) 0 0 no-repeat;
     background-size: 100% 100%;
     z-index: 5;
 }
@@ -97,7 +97,7 @@ $bannerBorderColor: $color_black;
     @extend %cta_position;
     width: $cta_width;
     height: $cta_height;
-    background: url(images/cta.svg) 0 0 no-repeat;
+    background: url(../images/cta.svg) 0 0 no-repeat;
     background-size: 100% 100%;
     z-index: 5;
 }
