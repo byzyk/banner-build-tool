@@ -2,7 +2,7 @@ Banner.init = function () {
 
     Banner.getElementsBy('id');
 
-    Banner.el.Banner.addEventListener('click', Banner.click);
+    Banner.el.clickTag.addEventListener('click', Banner.click);
 
     Banner.Data.dimension = Banner.getBannerDimension();
 
