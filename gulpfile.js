@@ -1,14 +1,24 @@
+var fs = require('fs');
+var path = require('path');
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var plugin = require('gulp-load-plugins')();
 var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
+var merge = require('merge-stream');
 
 var PATH = require('./app/server/path.js')();
 
 function task(name, plugins) {
     return require('./gulp-tasks/' + name)(gulp, plugins, PATH);
+}
+
+function getBanners() {
+    return fs.readdirSync(PATH.banners)
+        .filter(function(file) {
+            return fs.statSync(path.join(PATH.banners, file)).isDirectory();
+        });
 }
 
 
@@ -53,8 +63,9 @@ gulp.task('creative-sass', task('creative/sass', {
     browserSync: browserSync
 }));
 
-gulp.task('creative-engine', task('creative/engine', {
+gulp.task('creative-concat-engine', task('creative/concat-engine', {
     concat: plugin.concat,
-    newer: plugin.newer,
-    browserSync: browserSync
+    getBanners: getBanners,
+    merge: merge,
+    newer: plugin.newer
 }));

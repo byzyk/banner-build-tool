@@ -218,3 +218,14 @@ Banner.Events.init =  function () {
     Banner.Events.items = [];
 
 };
+Banner.callback = function () {
+    console.log('ok');
+};
+Banner.config = {
+        
+    lang: 'EN',
+    size: '120x600',
+    type: 'standard',
+    name: ''
+
+};

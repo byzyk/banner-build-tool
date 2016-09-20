@@ -14,6 +14,8 @@ Banner.init = function () {
 
         Banner.Events.init();
 
+        Banner.callback();
+
     });
 
 };

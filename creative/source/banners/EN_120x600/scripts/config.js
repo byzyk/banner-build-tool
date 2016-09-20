@@ -1,7 +1,7 @@
 Banner.config = {
         
     lang: 'EN',
-    size: '300x250',
+    size: '120x600',
     type: 'standard',
     name: ''
 

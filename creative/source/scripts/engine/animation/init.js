@@ -1,16 +1,11 @@
-Banner.Animation.config = BannerConfig;
-
 Banner.Animation.init = function () {
 
     var the = Banner.el,
 
-        conf = Banner.Animation.config(this),
+        conf = Banner.config,
 
         Timeline = {
-            main: new TimelineMax({
-                onComplete: function () {
-                }
-            })
+            main: new TimelineMax()
         };
     
     Banner.Animation.start(the, Timeline, conf);

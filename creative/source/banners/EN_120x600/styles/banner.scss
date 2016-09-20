@@ -33,7 +33,8 @@ $cta_width: 89px;
 $cta_height: 19px;
 %cta_position {
     left: 15px;
-    bottom: 150px;
+    bottom: 15px;
 }
 
-@import '../../styles/main';
+
+@import '../../../styles/main.scss';

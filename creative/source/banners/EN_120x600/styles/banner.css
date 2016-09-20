@@ -16,7 +16,7 @@
 
 #CTA {
   left: 15px;
-  bottom: 150px; }
+  bottom: 15px; }
 
 body {
   margin: 0;
@@ -58,21 +58,21 @@ body {
   position: absolute;
   width: 300px;
   height: 250px;
-  background: url(images/image.jpg) 0 0 no-repeat;
+  background: url(../images/image.jpg) 0 0 no-repeat;
   z-index: 3; }
 
 #Mask {
   position: absolute;
   width: 903px;
   height: 250px;
-  background: url(images/mask.png) 0 0 no-repeat;
+  background: url(../images/mask.png) 0 0 no-repeat;
   z-index: 3; }
 
 #Logo {
   position: absolute;
   width: 111px;
   height: 81px;
-  background: url(images/logo.png) 0 0 no-repeat;
+  background: url(../images/logo.png) 0 0 no-repeat;
   background-size: 100% 100%;
   z-index: 5; }
 
@@ -80,7 +80,7 @@ body {
   position: absolute;
   width: 162px;
   height: 71px;
-  background: url(images/text.svg) 0 0 no-repeat;
+  background: url(../images/text.svg) 0 0 no-repeat;
   background-size: 100% 100%;
   z-index: 5; }
 
@@ -88,6 +88,6 @@ body {
   position: absolute;
   width: 89px;
   height: 19px;
-  background: url(images/cta.svg) 0 0 no-repeat;
+  background: url(../images/cta.svg) 0 0 no-repeat;
   background-size: 100% 100%;
   z-index: 5; }

@@ -1,3 +1,6 @@
+Banner.callback = function () {
+    console.log('ok');
+};
 Banner.config = {
         
     lang: 'EN',
