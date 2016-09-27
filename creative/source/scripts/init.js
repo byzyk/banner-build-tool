@@ -1,5 +1,6 @@
 import Core from './banner/core';
 import Animation from './banner/animation';
+import Event from './banner/events';
 
 class Banner extends Core {
 
@@ -36,11 +37,15 @@ class Banner extends Core {
         let banner = {};
 
         this.Elements = super.getAllElementsById(this.Elements);
-        
+
         banner.animation = new Animation(this.Elements, config);
+        banner.events = new Event(this.Elements);
 
         super.checkAssetsLoaded()
-            .then( () => banner.animation.animate() );
+            .then( () => {
+                banner.animation.animate();
+                banner.events.init();
+            } );
 
         this.Timelines = super.getAllTimelines(banner.animation.Timeline);
 
