@@ -19,9 +19,9 @@ export default class Animation {
 
         timeline.main
             .to(the.Banner, 0.2, {opacity: 1})
-            .from(the.CTA, 1, {opacity: 0})
+            .from(the.CTA, 5, {opacity: 0})
         ;
-        
+
     }
 
 }

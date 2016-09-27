@@ -1,6 +1,17 @@
 export default class Core {
-
+    
     constructor() {
+        
+        this.Libs = {};
+        this.Libs.loaded = 0;
+        this.Libs.fails = 0;
+        this.Libs.source = [
+            ['TweenMax', '//s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js']
+        ];
+
+        this.Elements = {};
+        this.Timelines = [];
+        
     }
 
     getAllElementsById(Elements) {
@@ -26,20 +37,38 @@ export default class Core {
         return t;
 
     }
+    
 
-    loadImages(callback) {
+    loadScript(src, isLib) {
 
-        function getallBgimages() {
-            var url, B = [], A = document.getElementsByTagName('*');
-            A = B.slice.call(A, 0, A.length);
-            while (A.length) {
-                url = document.deepCss(A.shift(), 'background-image');
-                if (url) url = /url\(['"]?([^")]+)/.exec(url) || [];
-                url = url[1];
-                if (url && B.indexOf(url) == -1) B[B.length] = url;
-            }
-            return B;
-        }
+        var self = this;
+        return new Promise(function (resolve, reject) {
+
+            var s,
+                r;
+            r = false;
+            s = document.createElement('script');
+            s.src = src;
+            s.async = 'async';
+            s.onload = s.onreadystatechange = function() {
+                if ( !r && (!this.readyState || this.readyState == 'complete') ) {
+                    r = true;
+                    if(isLib) self.Libs.loaded++;
+                    resolve();
+                }
+            };
+            s.onerror = function() {
+                if(isLib) self.Libs.fails++;
+                reject(src);
+            };
+            document.getElementsByTagName('head')[0].appendChild(s);
+            
+        });
+
+    }
+    
+    
+    getAllImages() {
 
         document.deepCss = function (who, css) {
             if (!who || !who.style) return '';
@@ -54,26 +83,29 @@ export default class Core {
                 dv.getComputedStyle(who, "").getPropertyValue(css) || '';
         };
 
-        Array.indexOf = Array.indexOf ||
-            function (what, index) {
-                index = index || 0;
-                var L = this.length;
-                while (index < L) {
-                    if (this[index] === what) return index;
-                    ++index;
-                }
-                return -1;
-            };
+        var url, B = [], A = document.getElementsByTagName('*');
+        A = B.slice.call(A, 0, A.length);
+        while (A.length) {
+            url = document.deepCss(A.shift(), 'background-image');
+            if (url) url = /url\(['"]?([^")]+)/.exec(url) || [];
+            url = url[1];
+            if (url && B.indexOf(url) == -1) B[B.length] = url;
+        }
+        return B;
+        
+    }
 
-        var loaded = 0,
-            images = getallBgimages(),
-            imagesNum = images.length;
+    loadImages() {
+        
+        return new Promise((resolve, reject) => {
 
-        function preloadAllImages(cb) {
+            let loaded = 0,
+                images = this.getAllImages(),
+                imagesTotal = images.length;
 
-            if (imagesNum) {
+            if (imagesTotal) {
 
-                for (var i = 0; i < imagesNum; i++) {
+                for (var i = 0; i < imagesTotal; i++) {
                     preloadImage(images[i]);
                 }
 
@@ -83,28 +115,35 @@ export default class Core {
                     img.onload = function () {
 
                         loaded++;
-                        if (loaded === imagesNum) {
-                            if (cb) cb();
+                        if (loaded === imagesTotal) {
+                            resolve();
                         }
 
+                    };
+                    img.onerror = function () {
+                        reject(url);
                     }
                 }
 
             } else {
 
-                if (cb) cb();
+                resolve();
 
             }
-
-        }
-
-        preloadAllImages(callback);
+            
+        })
 
     }
+    
 
     checkAssetsLoaded() {
-        this.loadImages();
+        
+        return new Promise((resolve, reject) => {
+            this.loadImages()
+                .then(resolve)
+                .catch(reject);
+        });
+
     }
 
 }
-
