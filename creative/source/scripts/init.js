@@ -61,17 +61,19 @@ class Banner {
     }
 
     Init() {
-
-        let banner = {
-            core: new Core,
-            animation: new Animation
-        };
+        
+        let banner = {};
+        banner.core = new Core;
 
         this.Elements = banner.core.getAllElementsById(this.Elements);
+        
+        banner.animation = new Animation(this.Elements, config);
+
         // banner.core.checkAssetsLoaded();
 
-        banner.animation.init(this.Elements);
         this.Timelines = banner.core.getAllTimelines(banner.animation.Timeline);
+        
+        banner.animation.animate();
 
     }
 

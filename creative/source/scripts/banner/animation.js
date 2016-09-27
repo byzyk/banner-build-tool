@@ -1,24 +1,21 @@
 export default class Animation {
 
-    constructor() {
+    constructor(elements, config) {
 
-        this.Timeline = {};
+        this.Timeline = {
+            main: new TimelineMax()
+        };
+
+        this.Elements = elements;
+        this.Config = config;
         
     }
-
-    init(Elements) {
-
-        this.Elements = Elements;
-        this.Timeline.main = new TimelineMax();
-
-        this.animate(config.animation);
-
-    }
     
-    animate(c) {
+    animate() {
 
         let the = this.Elements,
-            timeline = this.Timeline;
+            timeline = this.Timeline,
+            c = this.Config.animation;
 
         timeline.main
             .to(the.Banner, 0.2, {opacity: 1})

@@ -20,7 +20,7 @@ module.exports = function (gulp, plugin, PATH) {
 
         gulp.watch([
                 PATH.banners + '/**/*',
-                PATH.scripts + '/build/init.js',
+                PATH.scripts + '/init.build.js',
                 '!'+PATH.banners +  '/**/*.{css,scss}'
             ])
             .on('change', plugin.browserSync.reload);
