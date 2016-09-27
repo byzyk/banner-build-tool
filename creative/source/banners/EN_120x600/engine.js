@@ -131,9 +131,6 @@ Banner.Animation.start = function (the, Timeline, conf) {
 
     ;
 
-
-    console.log(conf.size)
-
 };
 Banner.Animation.init = function () {
 

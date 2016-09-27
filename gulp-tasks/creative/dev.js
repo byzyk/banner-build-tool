@@ -7,13 +7,20 @@ module.exports = function (gulp, plugin, PATH) {
             PATH.scripts + '/init.js'
         ], ['creative-sass']);
         
+        // gulp.watch([
+        //     PATH.engineSrc + '/**/*.js',
+        //     PATH.banners + '/*/scripts/*.js'
+        // ], ['creative-concat-engine']);
+
         gulp.watch([
+            PATH.scripts + '/init.js',
             PATH.engineSrc + '/**/*.js',
             PATH.banners + '/*/scripts/*.js'
-        ], ['creative-concat-engine']);
+        ], ['creative-es6']);
 
         gulp.watch([
                 PATH.banners + '/**/*',
+                PATH.scripts + '/build/init.js',
                 '!'+PATH.banners +  '/**/*.{css,scss}'
             ])
             .on('change', plugin.browserSync.reload);

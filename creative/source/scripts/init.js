@@ -1,41 +1,26 @@
-var Banner;
+import Core from './banner/core';
+import Animation from './banner/animation';
 
+class Banner {
 
-window.onload = function() {
-    Banner = new BC;
-    Banner.Stacy();
-};
+    constructor() {
 
+        this.Libs = {};
+        this.Libs.loaded = 0;
+        this.Libs.fails = 0;
+        this.Libs.source = [
+            ['TweenMax', '//s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js']
+        ];
 
-function BC () { //BC -> BannerConstructor
+        this.Elements = {};
+        this.Timelines = [];
 
-    var b = this;
+    }
+    
+    loadScript(src, callback, isLib) {
 
-    b.createCORSRequest = function (method, url) {
-
-        var xhr = new XMLHttpRequest();
-
-        if ("withCredentials" in xhr) {
-
-            xhr.open(method, url, true);
-
-        } else if (typeof XDomainRequest != "undefined") {
-
-            xhr = new XDomainRequest();
-            xhr.open(method, url);
-
-        } else {
-
-            xhr = null;
-
-        }
-
-        return xhr;
-
-    };
-
-    b.appendScript = function(src, callback, isLib) {
-
+        var self = this;
+        
         var s,
             r;
         r = false;
@@ -45,57 +30,54 @@ function BC () { //BC -> BannerConstructor
         s.onload = s.onreadystatechange = function() {
             if ( !r && (!this.readyState || this.readyState == 'complete') ) {
                 r = true;
-                if(isLib) Banner.Libs.loaded++;
+                if(isLib) self.Libs.loaded++;
                 if (typeof callback !== 'undefined') callback();
             }
         };
         s.onerror = function() {
             console.log('error loading this script ' + src);
             if (typeof callback !== 'undefined') callback();
-            if(isLib) Banner.Libs.fails++;
+            if(isLib) self.Libs.fails++;
         };
         document.getElementsByTagName('head')[0].appendChild(s);
 
-    };
+    }
 
-    b.getBannerDimension = function () {
+    Stacy () {
 
-        var size = document.querySelector('[name="ad.size"]').getAttribute('content').split(',');
+        if (this.Libs.fails > 10) return;
 
-        return size[0].split('=')[1] + 'x' + size[1].split('=')[1];
-
-    };
-
-    b.Libs = {
-        loaded: 0,
-        fails: 0,
-        host: '//s0.2mdn.net/ads/studio/cached_libs/'
-    };
-    b.Libs.source = [
-        ['TweenMax', b.Libs.host + 'tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js']
-    ];
-
-    b.Stacy = function () {
-
-        if (b.Libs.fails > 10) return;
-
-        if (b.Libs.loaded < b.Libs.source.length) {
-            if (window[b.Libs.source[b.Libs.loaded][0]]) {
-                b.Libs.loaded++;
-                b.Stacy();
+        if (this.Libs.loaded < this.Libs.source.length) {
+            if (window[this.Libs.source[this.Libs.loaded][0]]) {
+                this.Libs.loaded++;
+                this.Stacy().bind(this);
             } else {
-                b.appendScript(b.Libs.source[b.Libs.loaded][1], b.Stacy, true);
+                this.loadScript(this.Libs.source[this.Libs.loaded][1], this.Stacy.bind(this), true);
             }
         } else {
-
-            b.appendScript('engine.js', function () {
-                b.init();
-            });
-            
+            this.Init();
         }
 
-    };
+    }
 
-    b.Data = {};
+    Init() {
+
+        let banner = {
+            core: new Core,
+            animation: new Animation
+        };
+
+        this.Elements = banner.core.getAllElementsById(this.Elements);
+        // banner.core.checkAssetsLoaded();
+
+        banner.animation.init(this.Elements);
+        this.Timelines = banner.core.getAllTimelines(banner.animation.Timeline);
+
+    }
 
 }
+
+window.onload = function() {
+    b = new Banner;
+    b.Stacy();
+};

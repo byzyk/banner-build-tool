@@ -63,6 +63,12 @@ gulp.task('creative-sass', task('creative/sass', {
     browserSync: browserSync
 }));
 
+gulp.task('creative-es6', task('creative/es6', {
+    browserify: browserify,
+    source: source,
+    merge: merge
+}));
+
 gulp.task('creative-concat-engine', task('creative/concat-engine', {
     concat: plugin.concat,
     getBanners: getBanners,

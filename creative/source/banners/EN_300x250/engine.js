@@ -131,9 +131,6 @@ Banner.Animation.start = function (the, Timeline, conf) {
 
     ;
 
-
-    console.log(conf.size)
-
 };
 Banner.Animation.init = function () {
 
@@ -219,7 +216,7 @@ Banner.Events.init =  function () {
 
 };
 Banner.callback = function () {
-    console.log('ok');
+    
 };
 Banner.config = {
         

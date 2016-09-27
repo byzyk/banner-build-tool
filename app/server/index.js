@@ -29,6 +29,7 @@ app.use('/app/jquery', express.static(pathRoot + '/node_modules/jquery/dist/jque
 
 app.use('/banner', express.static(pathRoot + '/creative/source/banners/'));
 app.use('/source', express.static(pathRoot + '/creative/source/'));
+app.use('/scripts', express.static(pathRoot + '/creative/source/scripts/'));
 
 app.listen(1337, function () {
     console.log('listening on port 1337');
