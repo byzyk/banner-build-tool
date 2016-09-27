@@ -1,4 +1,5 @@
 import Core from './banner/core';
+import Components from './banner/components';
 import Animation from './banner/animation';
 import Event from './banner/events';
 
@@ -35,23 +36,30 @@ class Banner extends Core {
     Init() {
         
         let banner = {};
+        
+        super.getAllElementsById();
 
-        this.Elements = super.getAllElementsById(this.Elements);
+        banner.components = new Components(this.Elements);
+        banner.components.init();
+
+        super.getAllElementsById();
+
+        banner.events = new Event(this.Elements);
 
         banner.animation = new Animation(this.Elements, config);
-        banner.events = new Event(this.Elements);
 
         super.checkAssetsLoaded()
             .then( () => {
-                banner.animation.animate();
                 banner.events.init();
+                banner.animation.animate();
             } );
 
-        this.Timelines = super.getAllTimelines(banner.animation.Timeline);
+        super.getAllTimelines(banner.animation.Timeline);
 
     }
 
 }
+
 
 window.onload = function() {
     b = new Banner;

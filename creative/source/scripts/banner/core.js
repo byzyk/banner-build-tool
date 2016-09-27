@@ -14,17 +14,17 @@ export default class Core {
         
     }
 
-    getAllElementsById(Elements) {
+    getAllElementsById() {
         
-        if (Elements.length) Elements = {};
+        if (this.Elements.length) this.Elements = {};
         
         var nodes = document.querySelectorAll('body [id]');
 
         for (var i = 0; i < nodes.length; i++) {
-            Elements[nodes[i].getAttribute('id')] = nodes[i];
+            this.Elements[nodes[i].getAttribute('id')] = nodes[i];
         }
 
-        return Elements;
+        return this.Elements;
 
     }
 
@@ -34,7 +34,7 @@ export default class Core {
         for (let timeline in timelines) {
             if (timelines.hasOwnProperty(timeline)) t.push(timelines[timeline]);
         }
-        return t;
+        this.Timelines = t;
 
     }
     
