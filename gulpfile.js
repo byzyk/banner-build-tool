@@ -54,7 +54,8 @@ gulp.task('app-es6', task('app/es6', {
 
 // --------------- CREATIVE
 gulp.task('creative-dev', ['browser-sync'], task('creative/dev', {
-    browserSync: browserSync
+    browserSync: browserSync,
+    path: path
 }));
 
 gulp.task('creative-sass', task('creative/sass', {
@@ -66,12 +67,6 @@ gulp.task('creative-sass', task('creative/sass', {
 gulp.task('creative-es6', task('creative/es6', {
     browserify: browserify,
     source: source,
-    merge: merge
-}));
-
-gulp.task('creative-concat-engine', task('creative/concat-engine', {
-    concat: plugin.concat,
-    getBanners: getBanners,
     merge: merge,
-    newer: plugin.newer
+    path: path
 }));

@@ -29,6 +29,7 @@ app.use('/app/jquery', express.static(pathRoot + '/node_modules/jquery/dist/jque
 
 app.use('/banner', express.static(pathRoot + '/creative/source/banners/'));
 app.use('/source', express.static(pathRoot + '/creative/source/'));
+app.use('/build', express.static(pathRoot + '/creative/build/'));
 app.use('/scripts', express.static(pathRoot + '/creative/source/scripts/'));
 
 app.listen(1337, function () {

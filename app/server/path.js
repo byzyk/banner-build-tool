@@ -17,11 +17,11 @@ module.exports = function () {
 
     // CREATIVE
     PATH.creative = 'creative';
+    PATH.build =  PATH.creative + '/build';
     PATH.source = PATH.creative + '/source';
     PATH.banners = PATH.source + '/banners';
     PATH.styles = PATH.source + '/styles';
     PATH.scripts = PATH.source + '/scripts';
-    PATH.engineSrc = PATH.scripts + '/banner';
 
     return PATH;
 
