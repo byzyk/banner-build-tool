@@ -70,3 +70,37 @@ gulp.task('creative-es6', task('creative/es6', {
     merge: merge,
     path: path
 }));
+
+gulp.task('build-scripts', ['creative-es6'], task('build/scripts', {
+    path: path,
+    getBanners: getBanners,
+    merge: merge,
+    concat: plugin.concat,
+    uglify: plugin.uglify
+}));
+
+gulp.task('build-styles', ['creative-sass'], task('build/styles', {
+    path: path,
+    getBanners: getBanners,
+    merge: merge,
+    cssmin: plugin.cssmin
+}));
+
+gulp.task('build-html', ['build-styles', 'build-scripts'], task('build/html', {
+    path: path,
+    getBanners: getBanners,
+    merge: merge,
+    processhtml: plugin.processhtml
+}));
+
+gulp.task('build-clean', ['build-html'], task('build/clean', {
+    path: path,
+    getBanners: getBanners,
+    merge: merge,
+    clean: plugin.clean
+}));
+
+gulp.task('build',
+    [
+        'build-clean'
+    ]);
