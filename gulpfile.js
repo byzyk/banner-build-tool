@@ -7,6 +7,10 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var merge = require('merge-stream');
+var pageres = require('pageres');
+var del = require('del');
+
+var option = require('minimist')(process.argv.slice(2));
 
 var PATH = require('./app/server/path.js')();
 
@@ -71,6 +75,11 @@ gulp.task('creative-es6', task('creative/es6', {
     path: path
 }));
 
+gulp.task('pre-clean', task('build/pre-clean', {
+    path: path,
+    del: del
+}));
+
 gulp.task('build-scripts', ['creative-es6'], task('build/scripts', {
     path: path,
     getBanners: getBanners,
@@ -95,12 +104,49 @@ gulp.task('build-html', ['build-styles', 'build-scripts'], task('build/html', {
 
 gulp.task('build-clean', ['build-html'], task('build/clean', {
     path: path,
+    del: del
+}));
+
+gulp.task('build-replace', ['build-clean'], task('build/replace', {
+    path: path,
     getBanners: getBanners,
     merge: merge,
-    clean: plugin.clean
+    replace: plugin.replace
 }));
+
+gulp.task('build-images', task('build/images', {
+    path: path,
+    getBanners: getBanners,
+    merge: merge,
+    imagemin: plugin.imagemin
+}));
+
+gulp.task('build-backup', [
+        'build-images',
+        'build-replace'
+    ], task('build/backup', {
+        path: path,
+        getBanners: getBanners,
+        merge: merge,
+        pageres: pageres
+    }));
+
+gulp.task('build-zip', ['build-backup'], task('build/zip', {
+        path: path,
+        getBanners: getBanners,
+        merge: merge,
+        zip: plugin.zip
+    }));
+
+gulp.task('build-zip-all', [
+        'build-zip'
+    ], task('build/zip-all', {
+        path: path,
+        zip: plugin.zip,
+        option: option
+    }));
 
 gulp.task('build',
     [
-        'build-clean'
+        'build-zip-all'
     ]);

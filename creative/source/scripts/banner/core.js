@@ -39,31 +39,29 @@ export default class Core {
     }
     
 
-    loadScript(src, isLib) {
+    loadScript(src, isLib, resolve, reject) {
 
         var self = this;
-        return new Promise(function (resolve, reject) {
 
-            var s,
-                r;
-            r = false;
-            s = document.createElement('script');
-            s.src = src;
-            s.async = 'async';
-            s.onload = s.onreadystatechange = function() {
-                if ( !r && (!this.readyState || this.readyState == 'complete') ) {
-                    r = true;
-                    if(isLib) self.Libs.loaded++;
-                    resolve();
-                }
-            };
-            s.onerror = function() {
-                if(isLib) self.Libs.fails++;
-                reject(src);
-            };
-            document.getElementsByTagName('head')[0].appendChild(s);
+        var s,
+            r;
+        r = false;
+        s = document.createElement('script');
+        s.src = src;
+        s.async = 'async';
+        s.onload = s.onreadystatechange = function() {
+            if ( !r && (!this.readyState || this.readyState == 'complete') ) {
+                r = true;
+                if(isLib) self.Libs.loaded++;
+                resolve();
+            }
+        };
+        s.onerror = function() {
+            if(isLib) self.Libs.fails++;
+            reject(src);
+        };
+        document.getElementsByTagName('head')[0].appendChild(s);
             
-        });
 
     }
     
@@ -95,54 +93,46 @@ export default class Core {
         
     }
 
-    loadImages() {
-        
-        return new Promise((resolve, reject) => {
+    loadImages(resolve, reject) {
 
-            let loaded = 0,
-                images = this.getAllImages(),
-                imagesTotal = images.length;
+        let loaded = 0,
+            images = this.getAllImages(),
+            imagesTotal = images.length;
 
-            if (imagesTotal) {
+        if (imagesTotal) {
 
-                for (var i = 0; i < imagesTotal; i++) {
-                    preloadImage(images[i]);
-                }
-
-                function preloadImage(url) {
-                    var img = new Image();
-                    img.src = url;
-                    img.onload = function () {
-
-                        loaded++;
-                        if (loaded === imagesTotal) {
-                            resolve();
-                        }
-
-                    };
-                    img.onerror = function () {
-                        reject(url);
-                    }
-                }
-
-            } else {
-
-                resolve();
-
+            for (var i = 0; i < imagesTotal; i++) {
+                preloadImage(images[i]);
             }
-            
-        })
+
+            function preloadImage(url) {
+                var img = new Image();
+                img.src = url;
+                img.onload = function () {
+
+                    loaded++;
+                    if (loaded === imagesTotal) {
+                        resolve();
+                    }
+
+                };
+                img.onerror = function () {
+                    reject(url);
+                }
+            }
+
+        } else {
+
+            resolve();
+
+        }
 
     }
     
 
-    checkAssetsLoaded() {
+    checkAssetsLoaded(resolve, reject) {
         
-        return new Promise((resolve, reject) => {
-            this.loadImages()
-                .then(resolve)
-                .catch(reject);
-        });
+        this.loadImages(resolve, reject);
 
     }
 

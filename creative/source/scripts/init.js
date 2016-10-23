@@ -18,12 +18,15 @@ class Banner extends Core {
 
             } else {
 
-                super.loadScript(this.Libs.source[this.Libs.loaded][1], true)
-                    .then(() => this.Stacy())
-                    .catch((src) => {
+                super.loadScript(
+                    this.Libs.source[this.Libs.loaded][1],
+                    true,
+                    () => this.Stacy(),
+                    (src) => {
                         console.log('Error loading script: ' + src);
                         this.Stacy();
-                    });
+                    }
+                );
 
             }
 
@@ -44,15 +47,16 @@ class Banner extends Core {
 
         super.getAllElementsById();
 
-        banner.events = new Event(this.Elements);
+        banner.events = new Event(this.Elements, config);
 
         banner.animation = new Animation(this.Elements, config);
 
-        super.checkAssetsLoaded()
-            .then( () => {
+        super.checkAssetsLoaded(
+            () => {
                 banner.events.init();
-                banner.animation.animate();
-            } );
+                banner.animation.init();
+            }
+        );
 
         super.getAllTimelines(banner.animation.Timeline);
 

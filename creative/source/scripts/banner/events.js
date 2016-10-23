@@ -33,16 +33,18 @@ export default class Events {
 
     addEvents() {
 
+        let the = this.Elements;
+
         this.add('#clickTag', 'click', () => {
             window.open(clickTag, '_blank');
         });
 
         this.add('#Banner', 'mouseover', () => {
-            TweenMax.to(this.Elements.CTA, .2, {ease: Power3.easeInOut, scale: 1.2});
+            TweenMax.to(the.CTA, .2, {ease: Power3.easeInOut, scale: 1.2});
         });
 
         this.add('#Banner', 'mouseout', () => {
-            TweenMax.to(this.Elements.CTA, .2, {ease: Power3.easeInOut, scale: 1});
+            TweenMax.to(the.CTA, .2, {ease: Power3.easeInOut, scale: 1});
         });
 
     }
