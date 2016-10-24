@@ -6,7 +6,7 @@ module.exports = function (gulp, plugin, PATH) {
                 plugin.path.join(PATH.build, 'zip', '*')
             ])
             .pipe(plugin.zip(plugin.option.campaign + '.zip'))
-            .pipe(gulp.dest(plugin.path.join(PATH.build, 'campaign')));
+            .pipe(gulp.dest(plugin.path.join(PATH.build, 'campaign')))out;
 
     };
 

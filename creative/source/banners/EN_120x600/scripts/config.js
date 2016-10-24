@@ -1,8 +1,12 @@
-Banner.config = {
+var b,config = {
         
     lang: 'EN',
-    size: '120x600',
+    size: '300x250',
     type: 'standard',
-    name: ''
+    name: '',
+
+    animation: {
+
+    }
 
 };
