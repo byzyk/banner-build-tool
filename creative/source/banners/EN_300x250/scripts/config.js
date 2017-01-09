@@ -7,6 +7,20 @@ var b,config = {
 
     animation: {
 
+    },
+    
+    animate: function (timeline, the, c) {
+
+        timeline.main
+            .to(the.Banner, 1, {opacity: 1})
+            .add('BACKUP')
+        ;
+
+        timeline.op
+            .from(the.CTA, 10, {opacity: 0})
+            .add('BACKUP')
+        ;
+        
     }
 
 };

@@ -2,8 +2,8 @@ module.exports = function (gulp, plugin, PATH) {
 
     return function () {
 
-        var banners = plugin.getBanners();
-        var html = banners.map(function (banner) {
+        let banners = plugin.getBanners();
+        let html = banners.map(function (banner) {
             return gulp.src([
                     plugin.path.join(PATH.banners, banner, '/index.html')
                 ])

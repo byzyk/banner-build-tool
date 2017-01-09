@@ -18,9 +18,9 @@ export default class Core {
         
         if (this.Elements.length) this.Elements = {};
         
-        var nodes = document.querySelectorAll('body [id]');
+        let nodes = document.querySelectorAll('body [id]');
 
-        for (var i = 0; i < nodes.length; i++) {
+        for (let i = 0; i < nodes.length; i++) {
             this.Elements[nodes[i].getAttribute('id')] = nodes[i];
         }
 
@@ -37,13 +37,13 @@ export default class Core {
         this.Timelines = t;
 
     }
-    
+
 
     loadScript(src, isLib, resolve, reject) {
 
-        var self = this;
+        let self = this;
 
-        var s,
+        let s,
             r;
         r = false;
         s = document.createElement('script');
@@ -61,27 +61,27 @@ export default class Core {
             reject(src);
         };
         document.getElementsByTagName('head')[0].appendChild(s);
-            
+
 
     }
-    
-    
+
+
     getAllImages() {
 
         document.deepCss = function (who, css) {
             if (!who || !who.style) return '';
-            var sty = css.replace(/\-([a-z])/g, function (a, b) {
+            let sty = css.replace(/\-([a-z])/g, function (a, b) {
                 return b.toUpperCase();
             });
             if (who.currentStyle) {
                 return who.style[sty] || who.currentStyle[sty] || '';
             }
-            var dv = document.defaultView || window;
+            let dv = document.defaultView || window;
             return who.style[sty] ||
                 dv.getComputedStyle(who, "").getPropertyValue(css) || '';
         };
 
-        var url, B = [], A = document.getElementsByTagName('*');
+        let url, B = [], A = document.getElementsByTagName('*');
         A = B.slice.call(A, 0, A.length);
         while (A.length) {
             url = document.deepCss(A.shift(), 'background-image');
@@ -90,7 +90,7 @@ export default class Core {
             if (url && B.indexOf(url) == -1) B[B.length] = url;
         }
         return B;
-        
+
     }
 
     loadImages(resolve, reject) {
@@ -101,12 +101,12 @@ export default class Core {
 
         if (imagesTotal) {
 
-            for (var i = 0; i < imagesTotal; i++) {
+            for (let i = 0; i < imagesTotal; i++) {
                 preloadImage(images[i]);
             }
 
             function preloadImage(url) {
-                var img = new Image();
+                let img = new Image();
                 img.src = url;
                 img.onload = function () {
 

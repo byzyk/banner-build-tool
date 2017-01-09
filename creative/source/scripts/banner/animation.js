@@ -3,7 +3,8 @@ export default class Animation {
     constructor(elements, config) {
 
         this.Timeline = {
-            main: new TimelineMax()
+            main: new TimelineMax(),
+            op: new TimelineMax()
         };
 
         this.Elements = elements;
@@ -18,11 +19,7 @@ export default class Animation {
             c = this.Config.animation,
             animate = this.Config.animate;
 
-        if (typeof animate === 'function') {
-            animate(timeline, the, c);
-        } else {
-            this.animate(timeline, the, c);
-        }
+        (typeof animate === 'function') ? animate(timeline, the, c) : this.animate(timeline, the, c);
 
     }
 

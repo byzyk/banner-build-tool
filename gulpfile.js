@@ -1,18 +1,18 @@
-var fs = require('fs');
-var path = require('path');
-var gulp = require('gulp');
-var browserSync = require('browser-sync').create();
-var plugin = require('gulp-load-plugins')();
-var browserify = require('browserify');
-var babelify = require('babelify');
-var source = require('vinyl-source-stream');
-var merge = require('merge-stream');
-var pageres = require('pageres');
-var del = require('del');
+let fs = require('fs');
+let path = require('path');
+let gulp = require('gulp');
+let browserSync = require('browser-sync').create();
+let plugin = require('gulp-load-plugins')();
+let browserify = require('browserify');
+let babelify = require('babelify');
+let source = require('vinyl-source-stream');
+let merge = require('merge-stream');
+let pageres = require('pageres');
+let del = require('del');
 
-var option = require('minimist')(process.argv.slice(2));
+let option = require('minimist')(process.argv.slice(2));
 
-var PATH = require('./app/server/path.js')();
+let PATH = require('./app/server/path.js')();
 
 function task(name, plugins) {
     return require('./gulp-tasks/' + name)(gulp, plugins, PATH);
@@ -57,7 +57,7 @@ gulp.task('app-es6', task('app/es6', {
 
 
 // --------------- CREATIVE
-gulp.task('creative-dev', ['browser-sync'], task('creative/dev', {
+gulp.task('develop', ['browser-sync'], task('creative/dev', {
     browserSync: browserSync,
     path: path
 }));
