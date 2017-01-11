@@ -20,7 +20,7 @@ class App extends React.Component {
     }
 
     getConfig () {
-        var url = '/api/get_config';
+        let url = '/api/get_config';
 
         $.ajax({
             url: url,
@@ -40,7 +40,7 @@ class App extends React.Component {
     }
     
     getCreativeList() {
-        var url = '/api/get_creative_list';
+        let url = '/api/get_creative_list';
 
         $.ajax({
             url: url,
@@ -60,21 +60,20 @@ class App extends React.Component {
             }.bind(this)
         });
     }
-    
-    loadBanner() {
-        var currentBannerName = this.state.banners[this.state.currentID];
 
-        var size = currentBannerName.split('_')[1],
+    loadBanner() {
+        let currentBannerName = this.state.banners[this.state.currentID];
+
+        let size = currentBannerName.split('_')[1],
             width = size.split('x')[0],
             height = size.split('x')[1];
 
         this.setState({
             currentBanner: {
-                name: currentBannerName,
-                size: size,
+                url: '/banner/' + currentBannerName,
                 width: width,
-                height: height,
-                url: '/banner/' + currentBannerName
+                height: height
+                // ...data.config
             }
         });
     }
