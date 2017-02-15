@@ -37,7 +37,7 @@ export default class Components {
     addComponents() {
 
         this.add('Comp', el => {
-            
+
             console.log(el, this);
 
         });
