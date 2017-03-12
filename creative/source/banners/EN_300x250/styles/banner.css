@@ -1,0 +1,93 @@
+#Logo {
+  right: 15px;
+  bottom: 0px; }
+
+#Image {
+  left: 0;
+  top: 0; }
+
+#Mask {
+  left: -700px;
+  top: 0; }
+
+#Text {
+  left: 15px;
+  top: 15px; }
+
+#CTA {
+  left: 15px;
+  bottom: 15px; }
+
+body {
+  margin: 0;
+  line-height: 1; }
+
+#Banner {
+  width: 300px;
+  height: 250px;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  font-family: "Font Regular", sans-serif;
+  opacity: 0; }
+  #Banner:hover {
+    cursor: pointer; }
+  #Banner:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #000000;
+    z-index: 15; }
+
+#clickTag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: transparent; }
+
+#Image {
+  position: absolute;
+  width: 300px;
+  height: 250px;
+  background: url(../images/image.jpg) 0 0 no-repeat;
+  z-index: 3; }
+
+#Mask {
+  position: absolute;
+  width: 903px;
+  height: 250px;
+  background: url(../images/mask.png) 0 0 no-repeat;
+  z-index: 3; }
+
+#Logo {
+  position: absolute;
+  width: 111px;
+  height: 81px;
+  background: url(../images/logo.png) 0 0 no-repeat;
+  background-size: 100% 100%;
+  z-index: 5; }
+
+#Text {
+  position: absolute;
+  width: 162px;
+  height: 71px;
+  background: url(../images/text.svg) 0 0 no-repeat;
+  background-size: 100% 100%;
+  z-index: 5; }
+
+#CTA {
+  position: absolute;
+  width: 89px;
+  height: 19px;
+  background: url(../images/cta.svg) 0 0 no-repeat;
+  background-size: 100% 100%;
+  z-index: 5; }

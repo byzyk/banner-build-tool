@@ -1,102 +1,71 @@
-var Banner,
-    conf = {};
+import Core from './banner/core';
+import Components from './banner/components';
+import Animation from './banner/animation';
+import Event from './banner/events';
+
+class Banner extends Core {
+
+    Stacy () {
+
+        if (this.Libs.fails > 10) return;
+
+        if (this.Libs.loaded < this.Libs.source.length) {
+
+            if (window[this.Libs.source[this.Libs.loaded][0]]) {
+
+                this.Libs.loaded++;
+                self.Stacy();
+
+            } else {
+
+                super.loadScript(
+                    this.Libs.source[this.Libs.loaded][1],
+                    true,
+                    () => this.Stacy(),
+                    (src) => {
+                        console.log('Error loading script: ' + src);
+                        this.Stacy();
+                    }
+                );
+
+            }
+
+        } else {
+            this.Init();
+        }
+
+    }
+
+    Init() {
+        
+        let banner = {};
+        
+        super.getAllElementsById();
+
+        banner.components = new Components(this.Elements);
+        banner.components.init();
+
+        super.getAllElementsById();
+
+        banner.events = new Event(this.Elements, config);
+
+        banner.animation = new Animation(this.Elements, config);
+
+        super.checkAssetsLoaded(
+            () => {
+                banner.events.init();
+                banner.animation.init();
+            }
+        );
+
+        super.getAllTimelines(banner.animation.Timeline);
+
+    }
+
+}
 
 
 window.onload = function() {
-    Banner = new BC;
-    Banner.Stacy();
+    b = new Banner;
+    b.Stacy();
 };
-
-
-function BC () { //BC -> BannerConstructor
-
-    var b = this;
-
-    b.createCORSRequest = function (method, url) {
-
-        var xhr = new XMLHttpRequest();
-
-        if ("withCredentials" in xhr) {
-
-            xhr.open(method, url, true);
-
-        } else if (typeof XDomainRequest != "undefined") {
-
-            xhr = new XDomainRequest();
-            xhr.open(method, url);
-
-        } else {
-
-            xhr = null;
-
-        }
-
-        return xhr;
-
-    };
-
-    b.appendScript = function(src, callback, isLib) {
-
-        var s,
-            r;
-        r = false;
-        s = document.createElement('script');
-        s.src = src;
-        s.async = 'async';
-        s.onload = s.onreadystatechange = function() {
-            if ( !r && (!this.readyState || this.readyState == 'complete') ) {
-                r = true;
-                if(isLib) Banner.Libs.loaded++;
-                if (typeof callback !== 'undefined') callback();
-            }
-        };
-        s.onerror = function() {
-            console.log('error loading this script ' + src);
-            if (typeof callback !== 'undefined') callback();
-            if(isLib) Banner.Libs.fails++;
-        };
-        document.getElementsByTagName('head')[0].appendChild(s);
-
-    };
-
-    b.getBannerDimension = function () {
-
-        var size = document.querySelector('[name="ad.size"]').getAttribute('content').split(',');
-
-        return size[0].split('=')[1] + 'x' + size[1].split('=')[1];
-
-    };
-
-    b.Libs = {
-        loaded: 0,
-        fails: 0,
-        host: '//s0.2mdn.net/ads/studio/cached_libs/'
-    };
-    b.Libs.source = [
-        ['TweenMax', b.Libs.host + 'tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js']
-    ];
-
-    b.Stacy = function () {
-
-        if (b.Libs.fails > 10) return;
-
-        if (b.Libs.loaded < b.Libs.source.length) {
-            if (window[b.Libs.source[b.Libs.loaded][0]]) {
-                b.Libs.loaded++;
-                b.Stacy();
-            } else {
-                b.appendScript(b.Libs.source[b.Libs.loaded][1], b.Stacy, true);
-            }
-        } else {
-
-            b.appendScript('/source/scripts/build/engine.min.js', function () {
-                b.init();
-            });
-            
-        }
-
-    };
-
-    b.Data = {};
-
-}
